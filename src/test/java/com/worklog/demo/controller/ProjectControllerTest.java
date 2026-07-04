@@ -1,6 +1,7 @@
 package com.worklog.demo.controller;
 
 import com.worklog.demo.Domain.Project;
+import org.apache.coyote.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -128,5 +129,39 @@ class ProjectControllerTest {
 
     @Test
     void deleteProject() {
+        RestClient restClient = RestClient.create("http://localhost:" + port);
+        Project nuevoProyecto = new Project("Worklog", "Jan Manté", "A simple worklog application");
+
+        ResponseEntity<Project> responsePost = restClient.post()
+                .uri("/project")
+                .body(nuevoProyecto)
+                .retrieve()
+                .toEntity(Project.class);
+
+        Long id = responsePost.getBody().getId();
+
+        ResponseEntity<Void> responseDelete = restClient.delete()
+                .uri("/project/" + id)
+                .retrieve()
+                .toEntity(Void.class);
+
+        assertEquals(HttpStatus.OK, responseDelete.getStatusCode());
+
+        try {
+            // Intentamos buscar el proyecto borrado
+            restClient.get()
+                    .uri("/project/" + id)
+                    .retrieve()
+                    .toEntity(Project.class);
+
+            // Si el código llega aquí, significa que NO dio error (mal, porque debería estar borrado)
+            fail("El test debería haber fallado porque el proyecto ya no existe (404).");
+
+        } catch (org.springframework.web.client.HttpClientErrorException.NotFound e) {
+            // ¡Perfecto! Ha saltado la excepción de "No encontrado" (404)
+            assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode(), "El código de respuesta debe ser 404.");
+        }
+
+        System.out.println(ANSI_GREEN+"¡Proyecto eliminado con éxito usando RestClient!"+ANSI_RESET);
     }
 }
