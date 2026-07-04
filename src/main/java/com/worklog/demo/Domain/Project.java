@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "productos")
-public class Projecte {
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,9 +13,9 @@ public class Projecte {
     private String autor;
     private String contingut;
 
-    public Projecte() {}
+    public Project() {}
 
-    public Projecte(String titol,String autor,String contingut){
+    public Project(String titol, String autor, String contingut){
         this.titol = titol;
         this.autor = autor;
         this.contingut = contingut;
