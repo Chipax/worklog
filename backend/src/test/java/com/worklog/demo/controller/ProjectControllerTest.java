@@ -127,7 +127,7 @@ class ProjectControllerTest {
 
         assertEquals(HttpStatus.OK, responsePut.getStatusCode());
         assertNotNull(updatedProject);
-        assertEquals("Worklog2", updatedProject.getTitol());
+        assertEquals("Worklog2", updatedProject.getTitle());
         System.out.println(ANSI_GREEN+"¡Proyecto actualizado con éxito usando RestClient!"+ANSI_RESET);
     }
 

@@ -26,17 +26,17 @@ class ProjectServiceTest {
     void testGuardarIrecuperarProjecte() {
         System.out.println(ANSI_PURPLE + "Test: test Guardar I recuperar Projecte" + ANSI_RESET);
         Project project = new Project();
-        project.setTitol("Test Project");
-        project.setAutor("Test Author");
-        project.setContingut("Test Content");
+        project.setTitle("Test Project");
+        project.setAuthor("Test Author");
+        project.setContent("Test Content");
 
         Project savedProject = projectService.saveProject(project);
         assertNotNull(savedProject.getId(), "El projecte guardat hauria de tenir un ID assignat.");
 
         Project retrievedProject = projectService.getProjectById(savedProject.getId()).orElse(null);
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project", retrievedProject.getTitol(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author", retrievedProject.getAutor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
         assertEquals("Test Content", retrievedProject.getContingut(), "El contingut del projecte recuperat no coincideix.");
     }
 
@@ -44,8 +44,8 @@ class ProjectServiceTest {
     void testGuardarProjecteSenseTitol() {
         System.out.println(ANSI_PURPLE + "Test: test Guardar Projecte sense Titol" + ANSI_RESET);
         Project project = new Project();
-        project.setAutor("Test Author");
-        project.setContingut("Test Content");
+        project.setAuthor("Test Author");
+        project.setContent("Test Content");
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             projectService.saveProject(project);
@@ -88,14 +88,14 @@ class ProjectServiceTest {
         Project retrievedProject2 = projectService.getProjectById(projec2.getId()).orElse(null);
 
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project", retrievedProject.getTitol(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author", retrievedProject.getAutor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content", retrievedProject.getContingut(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Content", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
 
         assertNotNull(retrievedProject2, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project2", retrievedProject2.getTitol(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author2", retrievedProject2.getAutor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content2", retrievedProject2.getContingut(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Project2", retrievedProject2.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author2", retrievedProject2.getAuthor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Content2", retrievedProject2.getContent(), "El contingut del projecte recuperat no coincideix.");
 
     }
 
@@ -115,9 +115,9 @@ class ProjectServiceTest {
         Project retrievedProject2 = projectService.getProjectById(project2.getId()).orElse(null);
 
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project", retrievedProject.getTitol(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author", retrievedProject.getAutor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content", retrievedProject.getContingut(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Content", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
 
         assertTrue(projectService.deleteProject(retrievedProject.getId()));
         assertTrue(projectService.deleteProject(retrievedProject2.getId()));
@@ -144,8 +144,8 @@ class ProjectServiceTest {
         retrievedProject = projectService.getProjectById(retrievedProject.getId()).orElse(null);
 
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project2", retrievedProject.getTitol(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author2", retrievedProject.getAutor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content2", retrievedProject.getContingut(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Project2", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author2", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Content2", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
     }
 }

@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0d1117; /* Fons fosc estil GitHub */
+    color: #c9d1d9; /* Text gris clar per a no cansar la vista */
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+
+/* ==========================================================================
+Part de creacio de projectes
+========================================================================== */
+
+.contenedor-creador {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+/* ==========================================================================
+Header i Nav
+========================================================================== */
+
+    header {
+    background-color: #161b22; /* Fons fosc estil editor */
+    border-bottom: 1px solid #30363d; /* Línia de divisió subtil */
+    padding: 1.5rem 3rem; /* Més alçada i espai lateral */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px); /* Efecte de vidre esmerilat al fer scroll */
+    
+    /* Línia superior decorativa amb gradient "developer" */
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #58a6ff, #6f57ff, #7ee787);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Empeny el títol a l'esquerra i els links a la dreta */
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Estil per al títol de l'app (WorkLog) */
+.app-title {
+    font-family: 'Courier New', Courier, monospace; /* Font de codi */
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #f0f6fc; /* Blanc brillant */
+    letter-spacing: -0.5px;
+}
+
+/* Contenidor de la llista d'enllaços (ul) */
+.nav-link {
+    display: flex;
+    gap: 1rem; /* Espaiat controlat entre botons */
+    list-style: none; /* Treu els punts de la llista */
+}
+
+/* Estil individual per a cada enllaç (li) */
+.nav-link li {
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #8b949e; /* Gris apagat per defecte */
+    padding: 0.6rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+/* Efecte Hover estil botó IDE */
+.nav-link li:hover {
+    color: #f0f6fc; /* El text s'il·lumina */
+    background-color: #21262d; /* Fons gris fosc */
+    border-color: #30363d; /* Es dibuixa el contorn */
+}
+
+/* Detall per destacar l'últim botó (Configuracion) */
+.nav-link li:last-child {
+    background-color: rgba(111, 87, 255, 0.1);
+    color: #6f57ff;
+    border: 1px solid rgba(111, 87, 255, 0.3);
+}
+
+.nav-link li:last-child:hover {
+    background-color: rgba(111, 87, 255, 0.2);
+    color: #8c7cff;
+    border-color: #6f57ff;
+}
+.login {
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #0d1117;             /* Text fosc per contrastar amb el fons verd */
+    background-color: #7ee787;  /* Verd cridaner estil GitHub (botó d'acció) */
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    border: 1px solid rgba(126, 231, 135, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efecte Hover per al Log in */
+.login:hover {
+    background-color: #56d364;  /* Un verd una mica més fosc al passar el ratolí */
+    box-shadow: 0 0 12px rgba(126, 231, 135, 0.4); /* Brillantor *glow* tech */
+    transform: translateY(-1px); /* Efecte subtil d'elevació */
+}

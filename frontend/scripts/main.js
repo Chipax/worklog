@@ -1,17 +1,21 @@
-const projectList = document.querySelector("#projectList");
-let URL = "http://localhost:8080/project";
+
+//seleccion de elements de configuracion
+const projectList = document.querySelector("#projectList");//selecciona el div on vull posar les tarjetes de projectes
+let URL = "http://localhost:8080/api/project";//URL del projecte
 
 async function cargarProyectos(){
     try {
-        //
+        //espera fins que la url retorna una resposta
         const respuesta = await fetch(URL);
+        //si falla envia un error
         if(!respuesta.ok) throw new Error('Error al conectar con la API');
-
+        //Agafem el json de la resposta
         const proyectos = await respuesta.json();
         
-
+        // buidem el projectList HTML(Per si hagues quedat algo)
         projectList.innerHTML = '';
 
+        // per cada projecte de el GET de projectes executa el innerHTML, creant aixi les tarjetes
         proyectos.forEach(proyecto => {
 
             projectList.innerHTML += `

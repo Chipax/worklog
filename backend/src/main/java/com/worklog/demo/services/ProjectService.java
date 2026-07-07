@@ -26,13 +26,13 @@ public class ProjectService {
         return projectRepository.findById(id);
     }
     public Project saveProject(Project project) {
-        if(project.getTitol()==null) {
+        if(project.getTitle()==null) {
             throw new IllegalArgumentException("No té titol");
         }
-        if(project.getAutor()==null) {
+        if(project.getAuthor()==null) {
             throw new IllegalArgumentException("No té autor");
         }
-        if(project.getContingut()==null) {
+        if(project.getContent()==null) {
             throw new IllegalArgumentException("No té contingut");
         }
         return projectRepository.save(project);
@@ -49,9 +49,9 @@ public class ProjectService {
     public Optional<Project> updateProject(Long id, Project updatedProject) {
         return projectRepository.findById(id)
                 .map(existingProject -> {
-                    existingProject.setTitol(updatedProject.getTitol());
-                    existingProject.setAutor(updatedProject.getAutor());
-                    existingProject.setContingut(updatedProject.getContingut());
+                    existingProject.setTitle(updatedProject.getTitle());
+                    existingProject.setAuthor(updatedProject.getAuthor());
+                    existingProject.setContent(updatedProject.getContent());
                     return projectRepository.save(existingProject);
                 });
     }

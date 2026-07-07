@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("api/project")
 @CrossOrigin(origins = "*") // <--- ESTA LÍNEA SOLUCIONA EL CORS
 public class ProjectController {
 

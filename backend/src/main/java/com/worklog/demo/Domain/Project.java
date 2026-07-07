@@ -9,16 +9,19 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titol;
-    private String autor;
-    private String contingut;
+    private String title;
+    private String author;
+    private String description;
+    private String content;
+    private String tech;
+
 
     public Project() {}
 
-    public Project(String titol, String autor, String contingut){
-        this.titol = titol;
-        this.autor = autor;
-        this.contingut = contingut;
+    public Project(String title, String author, String content){
+        this.title = title;
+        this.author = author;
+        this.content = content;
     }
 
     public Long getId() {
@@ -28,22 +31,28 @@ public class Project {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getTitol() {
-        return titol;
+
+    public String getTitle() {
+        return title;
     }
-    public void setTitol(String titol) {
-        this.titol = titol;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public String getAutor() {
-        return autor;
+
+    public String getAuthor() {
+        return author;
     }
-    public void setAutor(String autor) {
-        this.autor = autor;
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
-    public String getContingut() {
-        return contingut;
+
+    public String getContent() {
+        return content;
     }
-    public void setContingut(String contingut) {
-        this.contingut = contingut;
+
+    public void setContent(String contingut) {
+        this.content = contingut;
     }
 }
