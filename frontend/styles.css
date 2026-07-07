@@ -1,0 +1,246 @@
+/* --- Reset y Estilo Matriz --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; /* Fuente clásica de terminal */
+}
+
+body {
+    background-color: #030303; /* Negro profundo */
+    color: #00ff66; /* Verde neón clásico */
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Efecto de líneas de monitor antiguo (Scanlines) */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9999;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+/* --- Header y Menú de Comando --- */
+header {
+    border-bottom: 2px dashed #00ff66;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 20, 0, 0.5);
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start; /* Estilo prompt de comando */
+    list-style: none;
+    gap: 2rem;
+}
+
+nav li {
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
+}
+
+nav li::before {
+    content: "> "; /* Añade el cursor de consola antes de cada enlace */
+}
+
+nav li:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #00ff66;
+}
+
+/* --- Consola Principal --- */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* --- Grid de Módulos (Proyectos) --- */
+.AllProjects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* --- Tarjeta del Servidor/Proyecto --- */
+/* --- SUSTITUYE ESTAS SECCIONES EN TU styles.css ORIGINAL --- */
+
+/* 1. Mantenemos el estilo de la tarjeta 'project' pero mejoramos su borde */
+.project {
+    background-color: rgba(0, 5, 0, 0.9);
+    border: 1px solid #144e18; /* Borde más tenue por defecto */
+    border-radius: 2px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Título de estado del sistema mejorado */
+.project::before {
+    content: " [ STATUS: ANALYZING NETWORK... ]";
+    display: block;
+    background: #00ff66;
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 0.1rem 0.6rem;
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+.project:hover {
+    border-color: #00ff66;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+}
+
+.project:hover::before {
+    content: " [ ACCESS GRANTED ]";
+    animation: flicker 0.3s infinite;
+}
+
+
+/* 2. REESCRITURA TOTAL DE .project_info - AHORA MÁS DETALLADO */
+.project_info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-image: 
+        radial-gradient(rgba(0, 255, 102, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(0, 15, 0, 0.6), rgba(0, 5, 0, 0.8));
+    background-size: 20px 20px, 100% 100%; /* Fondo de retícula */
+}
+
+/* Cabecera del Proyecto */
+.project_title {
+    border-bottom: 1px solid rgba(0, 255, 102, 0.4);
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project_title h2 {
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 0 10px #00ff66, 0 0 15px #00ff66;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+/* Añadir un 'ID de Objeto' simulado en el título */
+.project_title::after {
+    content: "OBJ_ID: WL_v1.0";
+    font-size: 0.65rem;
+    color: #00aa44;
+}
+
+/* Sección de descripción */
+.project_description {
+    position: relative;
+    padding: 0.8rem;
+    background: rgba(0, 20, 0, 0.5);
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    border-left: 3px solid #00ff66;
+}
+
+/* Esquinas de decoración para la descripción */
+.project_description::before,
+.project_description::after {
+    content: "";
+    position: absolute;
+    width: 6px; height: 6px;
+    border: 1px solid #00ff66;
+}
+.project_description::before { top: -2px; left: -2px; border-bottom: none; border-right: none; }
+.project_description::after { bottom: -2px; right: -2px; border-top: none; border-left: none; }
+
+.project_description p {
+    font-size: 0.85rem;
+    color: #a3ffa3;
+    letter-spacing: 0.5px;
+}
+
+/* Sección del autor/operador */
+.project_author {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #00ff66;
+}
+
+.project_author::before {
+    content: "[ OPERATOR ] -----------------";
+    color: #00aa44;
+}
+
+.project_author p {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
+    text-transform: uppercase;
+}
+
+/* Sección de Tecnologías como Scripts de Ejecución */
+.project_tech {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* En dos columnas */
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px dashed rgba(0, 255, 102, 0.3);
+    padding-top: 1rem;
+}
+
+.tech {
+    background-color: transparent;
+    border: 1px solid #00ff66;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #00ff66;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tech::before {
+    content: "→ [exec]";
+    font-size: 0.6rem;
+    color: #fff;
+    opacity: 0.6;
+}
+
+/* Interacción de las tecnologías al pasar el ratón */
+.tech:hover {
+    background-color: #00ff66;
+    color: #000;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+
+/* --- ANIMACIÓN DE PARPADEO PARA EL ESTADO --- */
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 100% {
+        opacity: 1;
+        background: #00ff66;
+        color: #000;
+    }
+    20%, 21.999%, 63%, 63.999% {
+        opacity: 0.7;
+        background: rgba(0, 255, 102, 0.1);
+        color: #00ff66;
+    }
+}
