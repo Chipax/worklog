@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/project")
+@CrossOrigin(origins = "*") // <--- ESTA LÍNEA SOLUCIONA EL CORS
 public class ProjectController {
 
     private final ProjectService projectService;
