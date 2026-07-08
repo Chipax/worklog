@@ -1,6 +1,9 @@
 package com.worklog.demo.Domain;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "productos")
@@ -12,16 +15,26 @@ public class Project {
     private String title;
     private String author;
     private String description;
+
+    @JdbcTypeCode(SqlTypes.JSON)
     private String content;
-    private String tech;
+
 
 
     public Project() {}
 
-    public Project(String title, String author, String content){
+    public Project(String title, String author, String description){
         this.title = title;
         this.author = author;
+        this.description = description;
+        this.content = null;
+    }
+    public Project(String title,String author, String description,String content){
+        this.title = title;
+        this.author = author;
+        this.description = description;
         this.content = content;
+
     }
 
     public Long getId() {
@@ -54,5 +67,13 @@ public class Project {
 
     public void setContent(String contingut) {
         this.content = contingut;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
