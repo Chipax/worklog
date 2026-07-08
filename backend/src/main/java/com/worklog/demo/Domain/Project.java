@@ -4,9 +4,14 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.Instant;
 
 @Entity
-@Table(name = "productos")
+@Table(name = "proyectos")
+@EntityListeners(AuditingEntityListener.class) // 👈 Escucha eventos de la base de datos
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +24,9 @@ public class Project {
     @JdbcTypeCode(SqlTypes.JSON)
     private String content;
 
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private Instant createdAt;
 
 
     public Project() {}
@@ -65,8 +73,8 @@ public class Project {
         return content;
     }
 
-    public void setContent(String contingut) {
-        this.content = contingut;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getDescription() {
@@ -75,5 +83,13 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 }
