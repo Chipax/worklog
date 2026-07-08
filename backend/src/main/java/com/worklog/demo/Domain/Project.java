@@ -31,20 +31,6 @@ public class Project {
 
     public Project() {}
 
-    public Project(String title, String author, String description){
-        this.title = title;
-        this.author = author;
-        this.description = description;
-        this.content = null;
-    }
-    public Project(String title,String author, String description,String content){
-        this.title = title;
-        this.author = author;
-        this.description = description;
-        this.content = content;
-
-    }
-
     public Long getId() {
         return id;
     }

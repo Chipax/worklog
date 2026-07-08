@@ -1,5 +1,6 @@
 package com.worklog.demo.controller;
 
+import com.worklog.demo.DTO.DTOs.ProjectDTO;
 import com.worklog.demo.Domain.Project;
 import com.worklog.demo.services.ProjectService;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +21,25 @@ public class ProjectController {
 
 
     @GetMapping
-    public List<Project> findAll(){
+    public List<ProjectDTO> findAll(){
         return projectService.getAllProjects();
     }
 
     //Response entity perque aixi et dona mes informacio al retornar el objecte.
 
     @GetMapping("/{id}")
-    public ResponseEntity<Project> findById(@PathVariable Long id){
+    public ResponseEntity<ProjectDTO> findById(@PathVariable Long id){
         return projectService.getProjectById(id)
                 .map(project -> ResponseEntity.ok().body(project))
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping
-    public Project createProduct(@RequestBody Project project) {
+    public ProjectDTO createProduct(@RequestBody Project project) {
         return projectService.saveProject(project);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project updated){
+    public ResponseEntity<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody Project updated){
         return projectService.updateProject(id,updated)
                 .map(productUpdated -> ResponseEntity.ok().body(productUpdated))
                 .orElse(ResponseEntity.notFound().build());

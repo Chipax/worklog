@@ -1,5 +1,6 @@
 package com.worklog.demo.services;
 
+import com.worklog.demo.DTO.DTOs.ProjectDTO;
 import com.worklog.demo.Domain.Project;
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +65,7 @@ class ProjectServiceTest {
         projectService.saveProject(project);
         projectService.saveProject(projec2);
 
-        List<Project> projectsAfter = projectService.getAllProjects();
+        List<ProjectDTO> projectsAfter = projectService.getAllProjects();
 
 
         assertTrue(projectsAfter.size() >= 2);
