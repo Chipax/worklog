@@ -14,26 +14,115 @@ body {
 
 
 /* ==========================================================================
-Part de creacio de projectes
+Part de creacio de projectes (Estilo Dark Tech integrado)
 ========================================================================== */
 
 .contenedor-creador {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #161b22; /* Fons fosc com el header */
+    border: 1px solid #30363d; /* Línia de divisió subtil estil GitHub */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 
+.contenedor-creador h1 {
+    font-size: 1.8rem;
+    color: #f0f6fc;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Contenedor de los nuevos campos */
+.campos-proyecto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* Bloque que agrupa cada Label + Input */
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Estilo para los Labels */
+.grupo-formulario label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #8b949e; /* Mismo gris que los links del nav */
+    letter-spacing: 0.5px;
+    text-transform: uppercase; /* Toque profesional de formulario tech */
+}
+
+/* Estilo común para Inputs y Textareas */
+.grupo-formulario input[type="text"],
+.grupo-formulario textarea {
+    background-color: #0d1117; /* Fons más fosc para hacer contraste */
+    color: #c9d1d9; /* Texto claro */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Marcadores de posición (Placeholders) */
+.grupo-formulario input::placeholder,
+.grupo-formulario textarea::placeholder {
+    color: #484f58; /* Gris muy oscuro para el texto de guía */
+}
+
+/* Bloqueo de cambio de tamaño horizontal molesto en textareas */
+.grupo-formulario textarea {
+    resize: vertical; 
+}
+
+/* Efecto Focus (Cuando el usuario hace clic para escribir) */
+.grupo-formulario input[type="text"]:focus,
+.grupo-formulario textarea:focus {
+    border-color: #58a6ff; /* Azul brillante como el gradient del header */
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15); /* Efecto glow sutil azul */
+}
+
+/* Botón Guardar (Actualizado para encajar con el diseño) */
+button#guardar-btn {
+    margin-top: 25px;
+    padding: 0.7rem 1.5rem;
+    background-color: #21262d; 
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    width: 100%; /* Ocupa todo el ancho para cerrar el bloque limpiamente */
+}
+
+button#guardar-btn:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+    color: #f0f6fc;
+}
+
+button#guardar-btn:active {
+    transform: scale(0.98); /* Efecto de hundimiento al clickar */
+}
+
+/* Ajuste estético para EditorJS dentro de tu caja */
+.editorjs {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+    min-height: 200px;
+}
 
 /* ==========================================================================
 Header i Nav
@@ -134,4 +223,89 @@ nav {
     background-color: #56d364;  /* Un verd una mica més fosc al passar el ratolí */
     box-shadow: 0 0 12px rgba(126, 231, 135, 0.4); /* Brillantor *glow* tech */
     transform: translateY(-1px); /* Efecte subtil d'elevació */
+}
+
+/* ==========================================================================
+Correcciones de Contraste para EditorJS (Modo Oscuro Forzado)
+========================================================================== */
+
+/* 1. Forzar el fondo oscuro en la caja flotante (Inline Toolbar) */
+div.ce-inline-toolbar,
+div.ce-inline-toolbar__toggler,
+div.ce-inline-toolbar__buttons {
+    background-color: #161b22 !important;
+    border-color: #30363d !important;
+    color: #f0f6fc !important;
+}
+
+/* Los botones internos del menú flotante */
+button.ce-inline-tool {
+    color: #c9d1d9 !important;
+}
+
+button.ce-inline-tool:hover {
+    background-color: #21262d !important;
+    color: #f0f6fc !important;
+}
+
+/* 2. Forzar el fondo oscuro en la ToolBox (El menú desplegable del "+") */
+div.ce-popover,
+div.ce-popover__container,
+.ce-popover-item {
+    background-color: #161b22 !important;
+    border-color: #30363d !important;
+    color: #f0f6fc !important;
+}
+
+/* Asegurar que el texto y los iconos dentro del menú sean legibles */
+.ce-popover-item__icon, 
+.ce-popover-item__title,
+.ce-popover-item__secondary-title {
+    color: #c9d1d9 !important;
+}
+
+/* Cambiar el color cuando pasas el ratón por encima de las opciones */
+div.ce-popover-item:hover,
+div.ce-popover-item--active {
+    background-color: #21262d !important;
+    color: #f0f6fc !important;
+}
+
+/* El botón redondo flotante del "+" y el de mover bloques */
+.ce-toolbar__plus,
+.ce-toolbar__settings-btn {
+    color: #8b949e !important;
+    background-color: transparent !important;
+}
+
+.ce-toolbar__plus:hover,
+.ce-toolbar__settings-btn:hover {
+    background-color: #21262d !important;
+    color: #f0f6fc !important;
+}
+
+/* ==========================================================================
+Color de Selección de Texto (Resaltado Legible)
+========================================================================== */
+
+/* Esto cambia el color de selección en TODO el documento (incluyendo inputs y editor) */
+::selection {
+    background-color: #388bfd !important; /* Azul brillante estilo GitHub */
+    color: #ffffff !important;            /* Texto completamente blanco para máximo contraste */
+}
+
+/* Compatibilidad para navegadores basados en Firefox antiguo */
+::-moz-selection {
+    background-color: #388bfd !important;
+    color: #ffffff !important;
+}
+
+/* Ajuste específico para que EditorJS no rompa el resaltado en sus bloques */
+.ce-paragraph *, 
+.ce-header *,
+.cdx-block * {
+    ::selection {
+        background-color: #388bfd !important;
+        color: #ffffff !important;
+    }
 }

@@ -24,12 +24,12 @@ async function cargarProyectos(){
                 </div>
                 <div class="project_info">
                     <div class="project_title">
-                        <h2>${proyecto.titol}</h2>
+                        <h2>${proyecto.title}</h2>
                     </div>
                     <div class="project_description">
-                        <p>${proyecto.contingut}</p>
+                        <p>${proyecto.description}</p>
                     <div class="project_author">
-                        <p>${proyecto.autor}</p>
+                        <p>${proyecto.author}</p>
                     </div>
                     <div class="project_tech">
                         <p class="tech">Spring boot</p>

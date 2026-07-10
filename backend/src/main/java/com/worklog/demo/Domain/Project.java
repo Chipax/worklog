@@ -20,6 +20,7 @@ public class Project {
 
     private String title;
     private String author;
+    @Column(length = 1000)
     private String description;
 
     @JdbcTypeCode(SqlTypes.JSON)

@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.29.0/dist/editorjs.min.css">
     <link rel="stylesheet" href="css/NewProject.css">
+
     <title>WorkLog</title>
-    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
     
 </head>
 <body>
@@ -25,15 +24,28 @@
         </nav>
     </header>
 
-    <main>
+   <main>
+                <h1>Nuevo Proyecto</h1>
         <div class="contenedor-creador">
-            <h1>Nuevo Proyecto</h1>
+            
+            <div class="campos-proyecto">
+                <div class="grupo-formulario">
+                    <label for="project-title">Título del Proyecto</label>
+                    <input type="text" id="project-title" placeholder="Ej. Sistema de Control de Horas" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="project-description">Descripción Breve</label>
+                    <textarea id="project-description" placeholder="Escribe una pequeña descripción del proyecto..." rows="3"></textarea>
+                </div>
+            </div>
             <div class="editorjs" id="editorjs"></div>
             <button id="guardar-btn">Guardar Proyecto</button>
         </div>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
-    <script src="scripts/editorjs.js"></script>
+    <script src="scripts/NewProject.js"></script>
 </body>
 </html>
