@@ -30,7 +30,7 @@ class ProjectControllerTest {
 
     @Test
     void findAll() {
-        RestClient restClient = RestClient.create("http://localhost:" + port);
+        RestClient restClient = RestClient.create("http://localhost:" + port +"/api");
         Project nuevoProyecto = new Project("Worklog", "Jan Manté", "A simple worklog application");
         Project nuevoProyecto2 = new Project("Worklog2", "Jan Manté", "A simple worklog application");
 
@@ -61,7 +61,7 @@ class ProjectControllerTest {
 
     @Test
     void findById() {
-        RestClient restClient = RestClient.create("http://localhost:" + port);
+        RestClient restClient = RestClient.create("http://localhost:" + port +"/api");
         Project nuevoProyecto = new Project("Worklog", "Jan Manté", "A simple worklog application");
 
         ResponseEntity<Project> respuesta = restClient.post()
@@ -85,7 +85,7 @@ class ProjectControllerTest {
     @Test
     void createProduct() {
 
-        RestClient restClient = RestClient.create("http://localhost:" + port);
+        RestClient restClient = RestClient.create("http://localhost:" + port +"/api");
         // ==========================================
         // 1. TEST @PostMapping (Crear)
         // ==========================================
@@ -105,7 +105,7 @@ class ProjectControllerTest {
 
     @Test
     void updateProject() {
-        RestClient restClient = RestClient.create("http://localhost:" + port);
+        RestClient restClient = RestClient.create("http://localhost:" + port +"/api");
         Project nuevoProyecto = new Project("Worklog", "Jan Manté", "A simple worklog application");
         Project nuevoProyecto2 = new Project("Worklog2", "Jan Manté", "A simple worklog application");
 
@@ -133,7 +133,7 @@ class ProjectControllerTest {
 
     @Test
     void deleteProject() {
-        RestClient restClient = RestClient.create("http://localhost:" + port);
+        RestClient restClient = RestClient.create("http://localhost:" + port +"/api");
         Project nuevoProyecto = new Project("Worklog", "Jan Manté", "A simple worklog application");
 
         ResponseEntity<Project> responsePost = restClient.post()

@@ -22,9 +22,9 @@ public class DataLoader {
     @PostConstruct
     public void cargarDatosPredeterminados() {
         if (projectRepository.count() == 0) {
-            projectRepository.save(new Project("Worklog Application", "Jan Manté", "API REST con Spring Boot 4.", null));
-            projectRepository.save(new Project("E-Commerce Platform", "Jan Manté", "Tienda online simulada.", null));
-            projectRepository.save(new Project("Portfolio Web", "Jan Manté", "Sitio web personal.", null));
+            projectRepository.save(new Project("Worklog Application", "Jan Manté", "API REST con Spring Boot 4."));
+            projectRepository.save(new Project("E-Commerce Platform", "Jan Manté", "Tienda online simulada."));
+            projectRepository.save(new Project("Portfolio Web", "Jan Manté", "Sitio web personal."));
 
             System.out.println("\u001B[32m✔ ¡Base de datos de desarrollo completada! (Ignorada en tests)\u001B[0m");
         }

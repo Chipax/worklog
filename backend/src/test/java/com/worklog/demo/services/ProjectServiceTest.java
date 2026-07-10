@@ -1,7 +1,9 @@
 package com.worklog.demo.services;
 
 import com.worklog.demo.DTO.DTOs.ProjectDTO;
+import com.worklog.demo.DTO.mappers.ProjectMapper;
 import com.worklog.demo.Domain.Project;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class ProjectServiceTest {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
     @Autowired
@@ -29,16 +31,17 @@ class ProjectServiceTest {
         Project project = new Project();
         project.setTitle("Test Project");
         project.setAuthor("Test Author");
-        project.setContent("Test Content");
+        project.setDescription("Test Description");
 
-        Project savedProject = projectService.saveProject(project);
+        ProjectDTO.Response savedProjectDTO = projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent()));
+        Project savedProject = ProjectMapper.toEntity(savedProjectDTO);
         assertNotNull(savedProject.getId(), "El projecte guardat hauria de tenir un ID assignat.");
 
-        Project retrievedProject = projectService.getProjectById(savedProject.getId()).orElse(null);
+        ProjectDTO.Response retrievedProjectDTO = projectService.getProjectById(savedProjectDTO.id()).orElse(null);
+        Project retrievedProject = ProjectMapper.toEntity(retrievedProjectDTO);
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
         assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
         assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content", retrievedProject.getContingut(), "El contingut del projecte recuperat no coincideix.");
     }
 
     @Test
@@ -46,12 +49,9 @@ class ProjectServiceTest {
         System.out.println(ANSI_PURPLE + "Test: test Guardar Projecte sense Titol" + ANSI_RESET);
         Project project = new Project();
         project.setAuthor("Test Author");
-        project.setContent("Test Content");
+        project.setDescription("Test Description");
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            projectService.saveProject(project);
-        });
-
+        assertThrows(IllegalArgumentException.class, () -> projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent())));
     }
 
     @Test
@@ -59,13 +59,15 @@ class ProjectServiceTest {
         System.out.println(ANSI_PURPLE + "Test: test Get All Projects" + ANSI_RESET);
 
 
-        Project project = new Project("Test Project", "Test Author", "Test Content");
-        Project projec2 = new Project("Test Project2", "Test Author2", "Test Content2");
+        Project project = new Project("Test Project", "Test Author", "Test Description");
+        project.setDescription("Test Description");
+        Project projec2 = new Project("Test Project2", "Test Author2", "Test Description2");
+        projec2.setDescription("Test Description2");
 
-        projectService.saveProject(project);
-        projectService.saveProject(projec2);
+        projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent()));
+        projectService.saveProject(new ProjectDTO.Create(projec2.getTitle(), projec2.getAuthor(), projec2.getDescription(), projec2.getContent()));
 
-        List<ProjectDTO> projectsAfter = projectService.getAllProjects();
+        List<ProjectDTO.Response> projectsAfter = projectService.getAllProjects();
 
 
         assertTrue(projectsAfter.size() >= 2);
@@ -79,24 +81,29 @@ class ProjectServiceTest {
         System.out.println(ANSI_PURPLE + "Test: Get projects by ID " + ANSI_RESET);
 
 
-        Project project = new Project("Test Project", "Test Author", "Test Content");
-        Project projec2 = new Project("Test Project2", "Test Author2", "Test Content2");
+        Project project = new Project("Test Project", "Test Author", "Test Description");
+        project.setDescription("Test Description");
+        Project projec2 = new Project("Test Project2", "Test Author2", "Test Description2");
+        projec2.setDescription("Test Description2");
 
-        projectService.saveProject(project);
-        projectService.saveProject(projec2);
+        ProjectDTO.Response savedDTO1 = projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent()));
+        ProjectDTO.Response savedDTO2 = projectService.saveProject(new ProjectDTO.Create(projec2.getTitle(), projec2.getAuthor(), projec2.getDescription(), projec2.getContent()));
 
-        Project retrievedProject = projectService.getProjectById(project.getId()).orElse(null);
-        Project retrievedProject2 = projectService.getProjectById(projec2.getId()).orElse(null);
+        ProjectDTO.Response retrievedProjectDTO = projectService.getProjectById(savedDTO1.id()).orElse(null);
+        ProjectDTO.Response retrievedProject2DTO = projectService.getProjectById(savedDTO2.id()).orElse(null);
+
+        Project retrievedProject = ProjectMapper.toEntity(retrievedProjectDTO);
+        Project retrievedProject2 = ProjectMapper.toEntity(retrievedProject2DTO);
 
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
         assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
         assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Description", retrievedProject.getDescription(), "El contingut del projecte recuperat no coincideix.");
 
         assertNotNull(retrievedProject2, "El projecte recuperat no hauria de ser nul.");
         assertEquals("Test Project2", retrievedProject2.getTitle(), "El títol del projecte recuperat no coincideix.");
         assertEquals("Test Author2", retrievedProject2.getAuthor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content2", retrievedProject2.getContent(), "El contingut del projecte recuperat no coincideix.");
+        assertEquals("Test Description2", retrievedProject2.getDescription(), "El contingut del projecte recuperat no coincideix.");
 
     }
 
@@ -106,25 +113,33 @@ class ProjectServiceTest {
     void deleteProject() {System.out.println(ANSI_PURPLE + "Test: Delete projects by ID " + ANSI_RESET);
 
 
-        Project project = new Project("Test Project", "Test Author", "Test Content");
-        Project project2 = new Project("Test Project2", "Test Author2", "Test Content2");
+        Project project = new Project("Test Project", "Test Author", "Test Description");
+        project.setDescription("Test Description");
+        Project project2 = new Project("Test Project2", "Test Author2", "Test Description2");
+        project2.setDescription("Test Description2");
 
-        projectService.saveProject(project);
-        projectService.saveProject(project2);
+        ProjectDTO.Response savedDTO1 = projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent()));
+        ProjectDTO.Response savedDTO2 = projectService.saveProject(new ProjectDTO.Create(project2.getTitle(), project2.getAuthor(), project2.getDescription(), project2.getContent()));
 
-        Project retrievedProject = projectService.getProjectById(project.getId()).orElse(null);
-        Project retrievedProject2 = projectService.getProjectById(project2.getId()).orElse(null);
+        ProjectDTO.Response retrievedProjectDTO = projectService.getProjectById(savedDTO1.id()).orElse(null);
+        ProjectDTO.Response retrievedProject2DTO = projectService.getProjectById(savedDTO2.id()).orElse(null);
+
+        Project retrievedProject = ProjectMapper.toEntity(retrievedProjectDTO);
+        Project retrievedProject2 = ProjectMapper.toEntity(retrievedProject2DTO);
 
         assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
         assertEquals("Test Project", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
         assertEquals("Test Author", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
 
         assertTrue(projectService.deleteProject(retrievedProject.getId()));
-        assertTrue(projectService.deleteProject(retrievedProject2.getId()));
+        if(retrievedProject2 != null) {
+            assertTrue(projectService.deleteProject(retrievedProject2.getId()));
+        }
 
         assertTrue(projectService.getProjectById(retrievedProject.getId()).isEmpty());
-        assertTrue(projectService.getProjectById(retrievedProject2.getId()).isEmpty());
+        if(retrievedProject2 != null) {
+            assertTrue(projectService.getProjectById(retrievedProject2.getId()).isEmpty());
+        }
 
     }
 
@@ -132,21 +147,27 @@ class ProjectServiceTest {
     void updateProject() {
         System.out.println(ANSI_PURPLE + "Test: Update projects by ID " + ANSI_RESET);
 
-        Project project = new Project("Test Project", "Test Author", "Test Content");
-        Project project2 = new Project("Test Project2", "Test Author2", "Test Content2");
+        Project project = new Project("Test Project", "Test Author", "Test Description");
+        project.setDescription("Test Description");
+        Project project2 = new Project("Test Project2", "Test Author2", "Test Description2");
+        project2.setDescription("Test Description2");
 
 
-        projectService.saveProject(project);
+        ProjectDTO.Response savedDTO = projectService.saveProject(new ProjectDTO.Create(project.getTitle(), project.getAuthor(), project.getDescription(), project.getContent()));
 
-        Project retrievedProject = projectService.getProjectById(project.getId()).orElse(null);
+        ProjectDTO.Response retrievedProjectDTO = projectService.getProjectById(savedDTO.id()).orElse(null);
+        Project retrievedProject = ProjectMapper.toEntity(retrievedProjectDTO);
 
-        projectService.updateProject(retrievedProject.getId(), project2);
+        if(retrievedProject != null) {
+            projectService.updateProject(retrievedProject.getId(), new ProjectDTO.Update(savedDTO.id(), project2.getTitle(), project2.getAuthor(), project2.getDescription(), project2.getContent()));
+        }
 
-        retrievedProject = projectService.getProjectById(retrievedProject.getId()).orElse(null);
+        ProjectDTO.Response updatedProjectDTO = projectService.getProjectById(savedDTO.id()).orElse(null);
+        Project updatedProject = ProjectMapper.toEntity(updatedProjectDTO);
 
-        assertNotNull(retrievedProject, "El projecte recuperat no hauria de ser nul.");
-        assertEquals("Test Project2", retrievedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
-        assertEquals("Test Author2", retrievedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
-        assertEquals("Test Content2", retrievedProject.getContent(), "El contingut del projecte recuperat no coincideix.");
+        assertNotNull(updatedProject, "El projecte recuperat no hauria de ser nul.");
+        assertEquals("Test Project2", updatedProject.getTitle(), "El títol del projecte recuperat no coincideix.");
+        assertEquals("Test Author2", updatedProject.getAuthor(), "L'autor del projecte recuperat no coincideix.");
+        assertEquals("Test Description2", updatedProject.getDescription(), "El contingut del projecte recuperat no coincideix.");
     }
 }

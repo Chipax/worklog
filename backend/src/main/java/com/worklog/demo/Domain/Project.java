@@ -6,12 +6,13 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "proyectos")
-@EntityListeners(AuditingEntityListener.class) // 👈 Escucha eventos de la base de datos
+@EntityListeners(AuditingEntityListener.class)// 👈 Escucha eventos de la base de datos
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +31,14 @@ public class Project {
 
 
     public Project() {}
+
+    public Project(String title, String author, String description) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.content = null;
+    }
+
 
     public Long getId() {
         return id;
