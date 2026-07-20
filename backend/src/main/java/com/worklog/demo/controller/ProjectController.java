@@ -2,8 +2,11 @@ package com.worklog.demo.controller;
 
 import com.worklog.demo.DTO.DTOs.ProjectDTO;
 import com.worklog.demo.services.ProjectService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,8 +25,9 @@ public class ProjectController {
 
 
     @GetMapping
-    public List<ProjectDTO.Response> findAll(){
-        return projectService.getAllProjects();
+    public ResponseEntity<List<ProjectDTO.Response>> findAll(){
+        List<ProjectDTO.Response> projects = projectService.getAllProjects();
+        return ResponseEntity.ok(projects);
     }
 
     //Response entity perque aixi et dona mes informacio al retornar el objecte.
@@ -35,8 +39,23 @@ public class ProjectController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping
-    public ProjectDTO.Response createProduct(@RequestBody ProjectDTO.Create projectDTO) {
-        return projectService.saveProject(projectDTO);
+    public ResponseEntity<ProjectDTO.Response> createProduct(@RequestBody ProjectDTO.Create projectDTO) {
+        ProjectDTO.Response savedProject = projectService.saveProject(projectDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedProject);
+    }
+
+    @PostMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProjectDTO.Response> uploadImage(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+
+        if (file == null || file.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return projectService.addImageToProject(id, file)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")

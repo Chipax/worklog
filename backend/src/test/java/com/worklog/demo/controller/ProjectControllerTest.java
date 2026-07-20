@@ -49,7 +49,7 @@ class ProjectControllerTest {
                 .uri("/project")
                 .retrieve()
                 .toEntity(Project[].class);
-        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
+        assertEquals(HttpStatus.OK, respuestaGet.getStatusCode());
         Project[] proyectos = respuestaGet.getBody();
 
         assertNotNull(proyectos);
@@ -97,7 +97,7 @@ class ProjectControllerTest {
                 .retrieve()
                 .toEntity(Project.class);
 
-        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
+        assertEquals(HttpStatus.CREATED, respuesta.getStatusCode());
         assertNotNull(respuesta.getBody());
         System.out.println(ANSI_GREEN+"¡Proyecto creado con éxito usando RestClient!"+ANSI_RESET);
 

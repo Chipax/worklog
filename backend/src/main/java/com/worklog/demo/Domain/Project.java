@@ -23,6 +23,8 @@ public class Project {
     @Column(length = 1000)
     private String description;
 
+    private String imageUrl;
+
     @JdbcTypeCode(SqlTypes.JSON)
     private String content;
 
@@ -37,6 +39,13 @@ public class Project {
         this.title = title;
         this.author = author;
         this.description = description;
+        this.content = null;
+    }
+    public Project(String title, String author, String description,String imageUrl){
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.content = null;
     }
 
@@ -87,5 +96,12 @@ public class Project {
 
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String url){
+        imageUrl = url;
     }
 }
