@@ -1,246 +1,319 @@
-/* --- Reset y Estilo Matriz --- */
+/* ==========================================================================
+   RESET I CONFIGURACIÓ GENERAL
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; /* Fuente clásica de terminal */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: #030303; /* Negro profundo */
-    color: #00ff66; /* Verde neón clásico */
-    line-height: 1.6;
-    position: relative;
-    overflow-x: hidden;
+    background-color: #0d1117; /* Fons fosc estil GitHub */
+    color: #c9d1d9; /* Text gris clar per a no cansar la vista */
+    min-height: 100vh;
+    padding-bottom: 50px;
 }
 
-/* Efecto de líneas de monitor antiguo (Scanlines) */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 9999;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Per a tauletes i mòbils grans (Menys de 768px) */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 1.5rem; /* Reduïm l'espai interior del header */
+    }
+
+    nav {
+        flex-direction: column; /* Col·loca el títol, els links i el login en vertical */
+        gap: 1.2rem;
+        text-align: center;
+    }
+
+    .nav-link {
+        margin: 0; /* Eliminem els marges automàtics laterals */
+        padding: 0;
+        justify-content: center; /* Centrem els enllaços de navegació */
+        flex-wrap: wrap; /* Si no caben, baixen de línia */
+        gap: 0.5rem;
+    }
+
+    .nav-link li {
+        padding: 0.5rem 0.8rem; /* Botons una mica més compactes */
+        font-size: 0.9rem;
+    }
+
+    .Login {
+        width: 100%; /* El botó de Login ocupa tot l'ample disponible en mòbils */
+        text-align: center;
+        max-width: 200px; /* Evita que quedi gegant si el mòbil és ample */
+    }
+
+    main {
+        margin: 20px auto;
+    }
 }
 
-/* --- Header y Menú de Comando --- */
+/* Per a mòbils petits (Menys de 480px) */
+@media (max-width: 480px) {
+    .AllProjects {
+        /* Cambiem el minmax a 1fr perquè la targeta s'adapti al 100% de la pantalla */
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+
+    .project_imagen {
+        height: 150px; /* Imatge una mica més baixa en mòbils */
+    }
+
+    .project_info {
+        padding: 15px; /* Menys padding interior a la targeta */
+    }
+}
+/* ==========================================================================
+   HEADER I NAVEGACIÓ COMPLETA
+   ========================================================================== */
 header {
-    border-bottom: 2px dashed #00ff66;
-    padding: 1rem 2rem;
-    background-color: rgba(0, 20, 0, 0.5);
+    background-color: #161b22; /* Fons fosc estil editor */
+    border-bottom: 1px solid #30363d; /* Línia de divisió subtil */
+    padding: 1.5rem 3rem; /* Més alçada i espai lateral */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px); /* Efecte de vidre esmerilat al fer scroll */
+    
+    /* Línia superior decorativa amb gradient "developer" */
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #58a6ff, #6f57ff, #7ee787);
 }
 
 nav {
     display: flex;
-    justify-content: flex-start; /* Estilo prompt de comando */
-    list-style: none;
-    gap: 2rem;
+    justify-content: space-between; /* Empeny el títol a l'esquerra i els links a la dreta */
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-nav li {
+/* Estil per al títol de l'app (WorkLog) */
+.app-title {
+    font-family: 'Courier New', Courier, monospace; /* Font de codi */
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #f0f6fc; /* Blanc brillant */
+    letter-spacing: -0.5px;
+}
+
+/* Contenidor de la llista d'enllaços (ul) */
+.nav-link {
+    display: flex;
+    gap: 1rem; /* Espaiat controlat entre botons */
+    list-style: none; /* Treu els punts de la llista */
+}
+
+/* Estil individual per a cada enllaç (li) */
+.nav-link li {
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff66;
+    color: #8b949e; /* Gris apagat per defecte */
+    padding: 0.6rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease-in-out;
 }
 
-nav li::before {
-    content: "> "; /* Añade el cursor de consola antes de cada enlace */
+/* Efecte Hover estil botó IDE */
+.nav-link li:hover {
+    color: #f0f6fc; /* El text s'il·lumina */
+    background-color: #21262d; /* Fons gris fosc */
+    border-color: #30363d; /* Es dibuixa el contorn */
 }
 
-nav li:hover {
-    color: #fff;
-    text-shadow: 0 0 10px #fff, 0 0 20px #00ff66;
+/* Detall per destacar l'últim botó (Configuracion) */
+.nav-link li:last-child {
+    background-color: rgba(111, 87, 255, 0.1);
+    color: #6f57ff;
+    border: 1px solid rgba(111, 87, 255, 0.3);
 }
 
-/* --- Consola Principal --- */
+.nav-link li:last-child:hover {
+    background-color: rgba(111, 87, 255, 0.2);
+    color: #8c7cff;
+    border-color: #6f57ff;
+}
+.login {
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #0d1117;             /* Text fosc per contrastar amb el fons verd */
+    background-color: #7ee787;  /* Verd cridaner estil GitHub (botó d'acció) */
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    border: 1px solid rgba(126, 231, 135, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efecte Hover per al Log in */
+.login:hover {
+    background-color: #56d364;  /* Un verd una mica més fosc al passar el ratolí */
+    box-shadow: 0 0 12px rgba(126, 231, 135, 0.4); /* Brillantor *glow* tech */
+    transform: translateY(-1px); /* Efecte subtil d'elevació */
+}
+/* ==========================================================================
+   CONTENIDOR PRINCIPAL (MAIN)
+   ========================================================================== */
 main {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-/* --- Grid de Módulos (Proyectos) --- */
 .AllProjects {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+    gap: 25px;
 }
 
-/* --- Tarjeta del Servidor/Proyecto --- */
-/* --- SUSTITUYE ESTAS SECCIONES EN TU styles.css ORIGINAL --- */
-
-/* 1. Mantenemos el estilo de la tarjeta 'project' pero mejoramos su borde */
+/* ==========================================================================
+   TARGETA DE PROJECTE (PROJECT CARD)
+   ========================================================================== */
 .project {
-    background-color: rgba(0, 5, 0, 0.9);
-    border: 1px solid #144e18; /* Borde más tenue por defecto */
-    border-radius: 2px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
-    position: relative;
-    transition: all 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
 }
 
-/* Título de estado del sistema mejorado */
-.project::before {
-    content: " [ STATUS: ANALYZING NETWORK... ]";
-    display: block;
-    background: #00ff66;
-    color: #000;
-    font-size: 0.65rem;
-    font-weight: bold;
-    padding: 0.1rem 0.6rem;
-    text-align: right;
-    letter-spacing: 1px;
-}
-
+/* EFECTE HOVER PER A ENTRAR AL PROJECTE */
 .project:hover {
-    border-color: #00ff66;
-    box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+    transform: translateY(-5px); /* S'eleva lleugerament */
+    border-color: #6f57ff; /* Canvia el vora a un lila elèctric */
+    box-shadow: 0 10px 20px rgba(111, 87, 255, 0.15); /* Brillantor de fons */
 }
 
-.project:hover::before {
-    content: " [ ACCESS GRANTED ]";
-    animation: flicker 0.3s infinite;
+/* Imatge del projecte (Placeholder amb codi/patró) */
+.project_imagen {
+    height: 180px;
+    background: linear-gradient(135deg, #1f242c 0%, #0d1117 100%);
+    border-bottom: 1px solid #30363d;
+    position: relative;
+    overflow: hidden; /* Evita que qualsevol imatge o contingut surti de la targeta */
 }
 
+/* Ajust automàtic de la imatge dins del contenedor */
+.project_imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta i recorta la imatge sense deformar-la */
+    object-position: center; /* Centra el focus de la imatge */
+    display: block;
+    position: relative;
+    z-index: 2; /* S'ubica per sobre del placeholder icon (</>) */
+}
 
-/* 2. REESCRITURA TOTAL DE .project_info - AHORA MÁS DETALLADO */
+/* Simulació d'una icona de codi a la imatge buida (s'amaga quan hi ha <img>) */
+.project_imagen::before {
+    content: "</>";
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
+    color: #30363d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.3s ease;
+    z-index: 1; /* Es queda al fons */
+}
+
+/* Simulació d'una icona de codi a la imatge buida */
+.project_imagen::before {
+    content: "</>";
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
+    color: #30363d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.3s ease;
+}
+
+.project:hover .project_imagen::before {
+    color: #6f57ff; /* La icona s'il·lumina al fer hover a la targeta */
+}
+
+/* Informació del projecte */
 .project_info {
-    padding: 1rem;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    background-image: 
-        radial-gradient(rgba(0, 255, 102, 0.05) 1px, transparent 1px),
-        linear-gradient(rgba(0, 15, 0, 0.6), rgba(0, 5, 0, 0.8));
-    background-size: 20px 20px, 100% 100%; /* Fondo de retícula */
-}
-
-/* Cabecera del Proyecto */
-.project_title {
-    border-bottom: 1px solid rgba(0, 255, 102, 0.4);
-    padding-bottom: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
 }
 
 .project_title h2 {
-    font-size: 1.3rem;
-    color: #fff;
-    text-shadow: 0 0 10px #00ff66, 0 0 15px #00ff66;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 700;
+    font-size: 1.4rem;
+    color: #f0f6fc;
+    font-weight: 600;
 }
-
-/* Añadir un 'ID de Objeto' simulado en el título */
-.project_title::after {
-    content: "OBJ_ID: WL_v1.0";
-    font-size: 0.65rem;
-    color: #00aa44;
-}
-
-/* Sección de descripción */
-.project_description {
-    position: relative;
-    padding: 0.8rem;
-    background: rgba(0, 20, 0, 0.5);
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    border-left: 3px solid #00ff66;
-}
-
-/* Esquinas de decoración para la descripción */
-.project_description::before,
-.project_description::after {
-    content: "";
-    position: absolute;
-    width: 6px; height: 6px;
-    border: 1px solid #00ff66;
-}
-.project_description::before { top: -2px; left: -2px; border-bottom: none; border-right: none; }
-.project_description::after { bottom: -2px; right: -2px; border-top: none; border-left: none; }
 
 .project_description p {
-    font-size: 0.85rem;
-    color: #a3ffa3;
-    letter-spacing: 0.5px;
-}
-
-/* Sección del autor/operador */
-.project_author {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: #00ff66;
-}
-
-.project_author::before {
-    content: "[ OPERATOR ] -----------------";
-    color: #00aa44;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #8b949e;
+    /* Limita la descripció a 3 línies per si és molt llarga */
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .project_author p {
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff66;
-    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #6e7681;
+    font-style: italic;
 }
 
-/* Sección de Tecnologías como Scripts de Ejecución */
+/* ETIQUETES DE TECNOLOGIA (TECH STACK) */
 .project_tech {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* En dos columnas */
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    border-top: 1px dashed rgba(0, 255, 102, 0.3);
-    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto; /* Empeny les tecnologies al fons de la targeta */
+    padding-top: 10px;
 }
 
 .tech {
-    background-color: transparent;
-    border: 1px solid #00ff66;
-    padding: 0.4rem 0.6rem;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #00ff66;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-family: 'Courier New', Courier, monospace; /* Font tipus codi */
+    font-size: 0.8rem;
+    background-color: #21262d;
+    color: #58a6ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    text-transform: lowercase;
 }
 
-.tech::before {
-    content: "→ [exec]";
-    font-size: 0.6rem;
-    color: #fff;
-    opacity: 0.6;
+/* Opcional: Color diferent per a Spring Boot com a tech principal */
+.tech:first-child {
+    color: #7ee787; /* Verd per destacar (ex: Spring Boot / Java) */
+    background-color: rgba(126, 231, 135, 0.1);
 }
 
-/* Interacción de las tecnologías al pasar el ratón */
-.tech:hover {
-    background-color: #00ff66;
-    color: #000;
-    box-shadow: 0 0 10px #00ff66;
-}
-
-
-/* --- ANIMACIÓN DE PARPADEO PARA EL ESTADO --- */
-@keyframes flicker {
-    0%, 19.999%, 22%, 62.999%, 64%, 100% {
-        opacity: 1;
-        background: #00ff66;
-        color: #000;
-    }
-    20%, 21.999%, 63%, 63.999% {
-        opacity: 0.7;
-        background: rgba(0, 255, 102, 0.1);
-        color: #00ff66;
-    }
-}

@@ -38,6 +38,23 @@
                     <label for="project-description">Descripción Breve</label>
                     <textarea id="project-description" placeholder="Escribe una pequeña descripción del proyecto..." rows="3"></textarea>
                 </div>
+                
+            <div class="grupo-formulario">
+                <label>Imagen de Portada / Adjuntos</label>
+                <label for="project-image" class="dropzone-label">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span>Haz clic o arrastra una imagen aquí</span>
+                    <small>Formatos soportados: PNG, JPG, WEBP (Máx. 5MB)</small>
+                </label>
+                <input type="file" id="project-image" accept="image/*" class="file-input-hidden">
+                <!-- Contenedor opcional para vista previa JS -->
+                <div id="image-preview" class="image-preview"></div>
+            </div>
+
             </div>
             <div class="editorjs" id="editorjs"></div>
             <button id="guardar-btn">Guardar Proyecto</button>

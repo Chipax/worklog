@@ -17,10 +17,12 @@ async function cargarProyectos(){
 
         // per cada projecte de el GET de projectes executa el innerHTML, creant aixi les tarjetes
         proyectos.forEach(proyecto => {
-
+            var imageURL = "../Images/SpringBootPicture.png"
+            var imageALT = "SpringBoot image"
             projectList.innerHTML += `
             <div class="project">
                 <div class="project_imagen">
+                    <img src = "${imageURL}" alt = "${imageALT}">
                 </div>
                 <div class="project_info">
                     <div class="project_title">
