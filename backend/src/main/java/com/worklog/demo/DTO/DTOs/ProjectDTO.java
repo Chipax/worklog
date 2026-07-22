@@ -16,6 +16,7 @@ public class  ProjectDTO {
             String title,
             String author,
             String description,
+            String imageUrl,
             String content
     ){}
 
@@ -24,6 +25,7 @@ public class  ProjectDTO {
             String title,
             String author,
             String description,
+            String imageUrl,
             String content,
             Instant createdAt
     ){}

@@ -159,7 +159,7 @@ class ProjectServiceTest {
         Project retrievedProject = ProjectMapper.toEntity(retrievedProjectDTO);
 
         if(retrievedProject != null) {
-            projectService.updateProject(retrievedProject.getId(), new ProjectDTO.Update(savedDTO.id(), project2.getTitle(), project2.getAuthor(), project2.getDescription(), project2.getContent()));
+            projectService.updateProject(retrievedProject.getId(), new ProjectDTO.Update(savedDTO.id(), project2.getTitle(), project2.getAuthor(), project2.getDescription(), project2.getImageUrl(), project2.getContent()));
         }
 
         ProjectDTO.Response updatedProjectDTO = projectService.getProjectById(savedDTO.id()).orElse(null);

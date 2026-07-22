@@ -43,7 +43,7 @@ public class ProjectController {
         ProjectDTO.Response savedProject = projectService.saveProject(projectDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProject);
     }
-
+//Pujada de una imatge
     @PostMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProjectDTO.Response> uploadImage(
             @PathVariable Long id,

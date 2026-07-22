@@ -13,6 +13,7 @@ public class ProjectMapper {
                 project.getTitle(),
                 project.getAuthor(),
                 project.getDescription(),
+                project.getImageUrl(),
                 project.getContent(),
                 project.getCreatedAt()
         );
@@ -25,6 +26,7 @@ public class ProjectMapper {
         project.setTitle(dto.title());
         project.setAuthor(dto.author());
         project.setDescription(dto.description());
+        project.setImageUrl(dto.imageUrl());
         project.setContent(dto.content());
         project.setCreatedAt(dto.createdAt());
         return project;
@@ -44,6 +46,7 @@ public class ProjectMapper {
         project.setTitle(dto.title());
         project.setAuthor(dto.author());
         project.setDescription(dto.description());
+        project.setImageUrl(dto.imageUrl());
         project.setContent(dto.content());
     }
 
