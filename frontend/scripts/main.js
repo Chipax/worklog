@@ -2,7 +2,7 @@
 //seleccion de elements de configuracion
 const projectList = document.querySelector("#projectList");//selecciona el div on vull posar les tarjetes de projectes
 let URL = "http://localhost:8080/api/project";//URL del projecte
-
+let URLimg = "http://localhost:8080";
 async function cargarProyectos(){
     try {
         //espera fins que la url retorna una resposta
@@ -22,7 +22,7 @@ async function cargarProyectos(){
             projectList.innerHTML += `
             <div class="project">
                 <div class="project_imagen">
-                    <img src = "${imageURL}" alt = "${imageALT}">
+                    <img src = "${URLimg}${proyecto.imageUrl}">
                 </div>
                 <div class="project_info">
                     <div class="project_title">

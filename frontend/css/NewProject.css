@@ -11,7 +11,10 @@ body {
     min-height: 100vh;
     padding-bottom: 50px;
 }
-
+a{
+    text-decoration:none;
+    color: inherit;
+}
 
 /* ==========================================================================
 Part de creacio de projectes (Estilo Dark Tech integrado)
