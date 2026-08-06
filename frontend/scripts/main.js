@@ -3,6 +3,8 @@
 const projectList = document.querySelector("#projectList");//selecciona el div on vull posar les tarjetes de projectes
 let URL = "http://localhost:8080/api/project";//URL del projecte
 let URLimg = "http://localhost:8080";
+
+
 async function cargarProyectos(){
     try {
         //espera fins que la url retorna una resposta
@@ -17,12 +19,14 @@ async function cargarProyectos(){
 
         // per cada projecte de el GET de projectes executa el innerHTML, creant aixi les tarjetes
         proyectos.forEach(proyecto => {
-            var imageURL = "../Images/SpringBootPicture.png"
-            var imageALT = "SpringBoot image"
+        
+            var imageALT = "SpringBoot image";
+            var imagenHTML = proyecto.imageUrl  ? `<img src="${URLimg + proyecto.imageUrl}" alt="${imageALT}">`  : '';
+            
             projectList.innerHTML += `
             <div class="project">
                 <div class="project_imagen">
-                    <img src = "${URLimg}${proyecto.imageUrl}">
+                    ${imagenHTML}
                 </div>
                 <div class="project_info">
                     <div class="project_title">
@@ -30,6 +34,7 @@ async function cargarProyectos(){
                     </div>
                     <div class="project_description">
                         <p>${proyecto.description}</p>
+                    </div>
                     <div class="project_author">
                         <p>${proyecto.author}</p>
                     </div>
