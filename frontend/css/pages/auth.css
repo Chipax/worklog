@@ -1,0 +1,83 @@
+/* Contenedor centralizado común (Login / Register) */
+.auth-container {
+    max-width: 440px;
+    margin: 50px auto;
+    padding: 35px 30px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-logo {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6f57ff;
+    margin-bottom: 10px;
+}
+
+.auth-header h1 {
+    font-size: 1.5rem;
+    color: #f0f6fc;
+    margin-bottom: 6px;
+}
+
+.auth-header p {
+    font-size: 0.85rem;
+    color: #8b949e;
+}
+
+/* Mensaje de error dinámico */
+.auth-error {
+    background-color: rgba(248, 81, 73, 0.1);
+    border: 1px solid #f85149;
+    color: #ff7b72;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos de inputs compartidos (Email / Password) */
+.grupo-formulario input[type="password"],
+.grupo-formulario input[type="email"] {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grupo-formulario input[type="password"]:focus,
+.grupo-formulario input[type="email"]:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+}
+
+.auth-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #8b949e;
+    border-top: 1px solid #30363d;
+    padding-top: 15px;
+}
+
+.auth-footer a {
+    color: #58a6ff;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}

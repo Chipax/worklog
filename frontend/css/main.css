@@ -1,0 +1,12 @@
+/* Base */
+@import 'base.css';
+
+/* Componentes */
+@import 'components/header.css';
+@import 'components/project-card.css';
+@import 'components/editorjs.css';
+
+/* Páginas */
+@import 'pages/index.css';
+@import 'pages/creator.css';
+@import 'pages/auth.css';

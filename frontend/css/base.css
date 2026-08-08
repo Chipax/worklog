@@ -1,0 +1,34 @@
+/* Reset y estilos base del sitio */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Selección de texto */
+::selection {
+    background-color: #388bfd !important;
+    color: #ffffff !important;
+}
+
+::-moz-selection {
+    background-color: #388bfd !important;
+    color: #ffffff !important;
+}
+
+.hidden {
+    display : none !important;
+}

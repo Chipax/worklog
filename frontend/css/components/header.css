@@ -1,0 +1,121 @@
+header {
+    background-color: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 1.5rem 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #58a6ff, #6f57ff, #7ee787);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.app-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #f0f6fc;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+.nav-link li {
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #8b949e;
+    padding: 0.6rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+.nav-link li:hover {
+    color: #f0f6fc;
+    background-color: #21262d;
+    border-color: #30363d;
+}
+
+.nav-link li:last-child {
+    background-color: rgba(111, 87, 255, 0.1);
+    color: #6f57ff;
+    border: 1px solid rgba(111, 87, 255, 0.3);
+}
+
+.nav-link li:last-child:hover {
+    background-color: rgba(111, 87, 255, 0.2);
+    color: #8c7cff;
+    border-color: #6f57ff;
+}
+
+.login {
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #0d1117;
+    background-color: #7ee787;
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    border: 1px solid rgba(126, 231, 135, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.login:hover {
+    background-color: #56d364;
+    box-shadow: 0 0 12px rgba(126, 231, 135, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Responsive del Header */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 1.2rem;
+        text-align: center;
+    }
+
+    .nav-link {
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .nav-link li {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .login {
+        width: 100%;
+        text-align: center;
+        max-width: 200px;
+    }
+}

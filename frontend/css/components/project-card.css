@@ -1,0 +1,117 @@
+.project {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    border-color: #6f57ff;
+    box-shadow: 0 10px 20px rgba(111, 87, 255, 0.15);
+}
+
+.project_imagen {
+    height: 180px;
+    background: linear-gradient(135deg, #1f242c 0%, #0d1117 100%);
+    border-bottom: 1px solid #30363d;
+    position: relative;
+    overflow: hidden;
+}
+
+.project_imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.project_imagen::before {
+    content: "</>";
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
+    color: #30363d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+.project:hover .project_imagen::before {
+    color: #6f57ff;
+}
+
+.project_info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+.project_title h2 {
+    font-size: 1.4rem;
+    color: #f0f6fc;
+    font-weight: 600;
+}
+
+.project_description p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #8b949e;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project_author p {
+    font-size: 0.85rem;
+    color: #6e7681;
+    font-style: italic;
+}
+
+.project_tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.tech {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    background-color: #21262d;
+    color: #58a6ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    text-transform: lowercase;
+}
+
+.tech:first-child {
+    color: #7ee787;
+    background-color: rgba(126, 231, 135, 0.1);
+}
+
+/* Responsive de la targeta */
+@media (max-width: 480px) {
+    .project_imagen {
+        height: 150px;
+    }
+    .project_info {
+        padding: 15px;
+    }
+}
