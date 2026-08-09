@@ -153,3 +153,80 @@ button#guardar-btn:active {
     height: 100%;
     object-fit: cover;
 }
+/* Vista previa de imagen */
+.image-preview {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+/* Botón para cambiar/eliminar imagen */
+.btn-remove-preview {
+    background-color: rgba(248, 81, 73, 0.1);
+    color: #f85149;
+    border: 1px solid rgba(248, 81, 73, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-preview:hover {
+    background-color: rgba(248, 81, 73, 0.25);
+    border-color: #f85149;
+}
+
+/* Contenedor de botones de la vista previa */
+.preview-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Botón Cambiar Imagen (Azul) */
+.btn-change-preview {
+    background-color: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-change-preview:hover {
+    background-color: rgba(88, 166, 255, 0.25);
+    border-color: #58a6ff;
+}
+
+/* Botón Eliminar (Rojo) */
+.btn-remove-preview {
+    background-color: rgba(248, 81, 73, 0.1);
+    color: #f85149;
+    border: 1px solid rgba(248, 81, 73, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-preview:hover {
+    background-color: rgba(248, 81, 73, 0.25);
+    border-color: #f85149;
+}

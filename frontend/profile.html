@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - WorkLog</title>
+    
+    <!-- Estilos base, navbar y perfil -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header>
+        <nav>
+            <div class="app-title"><a href="index.html">WorkLog</a></div>
+
+            <ul class="nav-link">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Perfil</a></li>
+                <li><a href="#">Favoritos</a></li>
+                <li class="btn-crear auth-only hidden"><a href="NewProject.html">+ Crear Proyecto</a></li>
+            </ul>
+
+            <div class="nav-auth">
+                <div id="guest-menu" class="guest-only">
+                    <a href="login.html" class="login">Log in</a>
+                </div>
+                <div id="user-menu" class="user-menu auth-only hidden">
+                    <span id="user-name" class="user-name"></span>
+                    <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="profile-container">
+        
+        <!-- CABECERA DE PERFIL -->
+        <section class="profile-header">
+            <div class="profile-avatar">
+                <span id="profile-avatar-initials">JM</span>
+            </div>
+            <div class="profile-info">
+                <h1 id="profile-full-name">Jan Manté</h1>
+                <p id="profile-username" class="profile-username">@janmante</p>
+                <p id="profile-bio" class="profile-bio">
+                    Desarrollador Full Stack. Creando proyectos en Spring Boot, JS y Docker.
+                </p>
+            </div>
+        </section>
+
+        <hr class="profile-divider">
+
+        <!-- SECCIÓN DE PROYECTOS -->
+        <section class="user-projects-section">
+            <h2>Proyectos Creados</h2>
+            
+            <!-- Contenedor adaptativo donde projectCard.js inyectará las cartas -->
+            <div id="projectList" class="projects-grid">
+                <!-- Las tarjetas generadas por projectCard.js tomarán el CSS de .project de forma automática -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT PRINCIPAL -->
+    <script type="module" src="scripts/pages/profile.js"></script>
+</body>
+</html>
